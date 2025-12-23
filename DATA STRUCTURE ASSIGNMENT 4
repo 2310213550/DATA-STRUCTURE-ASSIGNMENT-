@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+void insert(int a[], int *n, int val) {
+    int i = (*n)++;
+    a[i] = val;
+    while (i && a[(i-1)/2] < a[i]) {
+        int t = a[i];
+        a[i] = a[(i-1)/2];
+        a[(i-1)/2] = t;
+        i = (i-1)/2;
+    }
+}

@@ -1,0 +1,40 @@
+        A
+       / \
+      B   C
+     / \   \
+    D   E   F
+
+
+| Index | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+| ----- | - | - | - | - | - | - | - |
+| Value | A | B | C | D | E | - | F |
+
+
+#include <stdio.h>
+
+int main() {
+    char tree[10];
+
+    tree[0] = 'A';  // Root
+    tree[1] = 'B';  // Left child of A
+    tree[2] = 'C';  // Right child of A
+    tree[3] = 'D';  // Left child of B
+    tree[4] = 'E';  // Right child of B
+    tree[6] = 'F';  // Right child of C
+
+    printf("Binary Tree using Array:\n");
+    for(int i = 0; i < 7; i++) {
+        if(tree[i] != '\0')
+            printf("Index %d -> %c\n", i, tree[i]);
+    }
+
+    return 0;
+}
+
+OUT-PUT:
+Index 0 -> A
+Index 1 -> B
+Index 2 -> C
+Index 3 -> D
+Index 4 -> E
+Index 6 -> F

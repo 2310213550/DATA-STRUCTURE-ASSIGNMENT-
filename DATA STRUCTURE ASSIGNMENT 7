@@ -1,80 +1,60 @@
+Array adding and deletion
+
+Array insertion adds an element at a specified position by shifting elements right,
+while deletion removes an element by shifting elements left.
+
+
+
+
 #include <stdio.h>
 
-int main() {
-    int arr[100];
-    int size, choice, pos, value;
+#define MAX 100
 
-    // Input initial array size
-    printf("Enter the number of elements: ");
-    scanf("%d", &size);
-
-    // Input array elements
-    printf("Enter %d elements:\n", size);
-    for (int i = 0; i < size; i++) {
-        scanf("%d", &arr[i]);
+// Insertion
+void insertElement(int arr[], int *n, int element, int position) {
+    if (*n >= MAX) {
+        printf("Array overflow. Cannot insert.\n");
+        return;
     }
 
-    while (1) {
-        printf("\n--- MENU ---\n");
-        printf("1. Insert element\n");
-        printf("2. Delete element\n");
-        printf("3. Display array\n");
-        printf("4. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-
-        switch (choice) {
-
-        case 1:   // Insertion
-            printf("Enter position (0 to %d): ", size);
-            scanf("%d", &pos);
-
-            printf("Enter value to insert: ");
-            scanf("%d", &value);
-
-            if (pos < 0 || pos > size) {
-                printf("Invalid position!\n");
-            } else {
-                // Shift elements right
-                for (int i = size; i > pos; i--) {
-                    arr[i] = arr[i - 1];
-                }
-                arr[pos] = value;
-                size++;
-                printf("Element inserted successfully.\n");
-            }
-            break;
-
-        case 2:   // Deletion
-            printf("Enter position (0 to %d): ", size - 1);
-            scanf("%d", &pos);
-
-            if (pos < 0 || pos >= size) {
-                printf("Invalid position!\n");
-            } else {
-                // Shift elements left
-                for (int i = pos; i < size - 1; i++) {
-                    arr[i] = arr[i + 1];
-                }
-                size--;
-                printf("Element deleted successfully.\n");
-            }
-            break;
-
-        case 3:   // Display
-            printf("Array elements:\n");
-            for (int i = 0; i < size; i++) {
-                printf("%d ", arr[i]);
-            }
-            printf("\n");
-            break;
-
-        case 4:   // Exit
-            printf("Program exited.\n");
-            return 0;
-
-        default:
-            printf("Invalid choice!\n");
-        }
+    if (position < 0 || position > *n) {
+        printf("Invalid position.\n");
+        return;
     }
+
+    // Shift elements to the right
+    for (int i = *n; i > position; i--) {
+        arr[i] = arr[i - 1];
+    }
+
+    arr[position] = element;
+    (*n)++;
+}
+
+// Deletion
+void deleteElement(int arr[], int *n, int position) {
+    if (*n <= 0) {
+        printf("Array underflow. Cannot delete.\n");
+        return;
+    }
+
+    if (position < 0 || position >= *n) {
+        printf("Invalid position.\n");
+        return;
+    }
+
+    // Shift elements to the left
+    for (int i = position; i < *n - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+
+    (*n)--;
+}
+
+// Display array elements
+void displayArray(int arr[], int n) {
+    printf("Array: ");
+    for (int i = 0; i < n; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
 }
